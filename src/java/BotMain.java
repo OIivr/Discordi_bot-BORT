@@ -23,12 +23,12 @@ public class BotMain {
 
         final String TOKEN = loeTokenfailist("/Users/oliverpikani/Projects/token.txt");// < -- oma token faili tee
 
-        JDABuilder jdaBuilder = JDABuilder.createDefault(TOKEN);
-        JDA jda = jdaBuilder
+        JDABuilder botiEhitaja = JDABuilder.createDefault(TOKEN);
+        JDA bot = botiEhitaja
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new kasBotOnline(), new SõnumiteLugeja(), new Käsklused())
                 .build();
 
-        jda.upsertCommand("tere", "Tere tere vana kere").setGuildOnly(true).queue();
+        bot.upsertCommand("tere", "Tere tere vana kere").setGuildOnly(true).queue();
     }
 }
