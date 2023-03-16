@@ -1,1 +1,5 @@
-# Java-Discordi-bot
+# Java Discordi bot
+
+OOP rühmatöö 1
+
+Autorid:
