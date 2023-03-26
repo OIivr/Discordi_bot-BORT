@@ -14,21 +14,26 @@ public class BotMain {
             Scanner scanner = new Scanner(fail);
             return scanner.nextLine();
         } catch (FileNotFoundException e) {
-            System.out.println("Faili ei leidnud.");
+            System.out.println("Faili ei leitud.");
             e.printStackTrace();
         }
         return null;
     }
     public static void main(String[] args) {
 
-        final String TOKEN = loeTokenfailist("/Users/oliverpikani/Projects/token.txt");// < -- oma token faili tee
+        final String TOKEN = loeTokenfailist("/Users/oliverpikani/Projects/token.txt");
 
-        JDABuilder botiEhitaja = JDABuilder.createDefault(TOKEN);
+        JDABuilder botiEhitaja = JDABuilder.createDefault(TOKEN); // Loob boti isendi tokeni järgi.
         JDA bot = botiEhitaja
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES)
-                .addEventListeners(new kasBotOnline(), new SõnumiteLugeja(), new Käsklused())
+                .addEventListeners(new kasBotOnline(), new Käsklused())
                 .build();
 
         bot.upsertCommand("tere", "Tere tere vana kere").setGuildOnly(true).queue();
+        bot.upsertCommand("oop", "OOP-i kontrolltööde ajad").setGuildOnly(true).queue();
+        bot.upsertCommand("proge2", "Programmeerimine 2 kontrolltööde ajad").setGuildOnly(true).queue();
+        bot.upsertCommand("andmebaasid", "Andmebaasid kontrolltööde ajad").setGuildOnly(true).queue();
+        bot.upsertCommand("diskmat", "Diskreetse matemaatika kontrolltööde ajad").setGuildOnly(true).queue();
+        bot.upsertCommand("tntms", "Tõenäosusteooria ja matemaatilise statistika kontrolltööde ajad").setGuildOnly(true).queue();
     }
 }
