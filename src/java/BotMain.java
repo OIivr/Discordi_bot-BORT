@@ -20,7 +20,7 @@ public class BotMain {
     }
     public static void main(String[] args){
 
-        final String TOKEN = loeTokenfailist("/Users/dariusko/Desktop/OOP/token.txt"); // /Users/oliverpikani/Projects/token.txt
+        final String TOKEN = loeTokenfailist("/Users/dariusko/Desktop/OOP/token.txt"); // /Users/oliverpikani/Projects/token.txt  | /Users/dariusko/Desktop/OOP/token.txt
 
         JDABuilder botiEhitaja = JDABuilder.createDefault(TOKEN); // Loob boti isendi tokeni järgi.
         JDA bot = botiEhitaja
@@ -36,5 +36,6 @@ public class BotMain {
         bot.upsertCommand("andmebaasid", "Andmebaasid kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("diskmat", "Diskreetse matemaatika kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("tnt", "Tõenäosusteooria ja matemaatilise statistika kontrolltööde ajad").setGuildOnly(true).queue();
+        bot.upsertCommand("jargmine", "Järgmise leitava kontrolltöö aeg").setGuildOnly(true).queue();
     }
 }
