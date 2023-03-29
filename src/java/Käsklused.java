@@ -12,7 +12,7 @@ public class Käsklused extends ListenerAdapter {
 
         System.out.println("käsklust /" + käsklus.getName() + " kasutas: " + käsklus.getUser().getAsTag());
 
-        SündmusedTunniplaanis sündmusedTunniplaanis = new SündmusedTunniplaanis("/Users/dariusko/Desktop/OOP/ois2-calendar-et.ics"); // /Users/oliverpikani/Projects/biweekly/ois2-calendar-et (2).ics
+        SündmusedTunniplaanis sündmusedTunniplaanis = new SündmusedTunniplaanis("/Users/dariusko/Desktop/OOP/ois2-calendar-et.ics"); // /Users/oliverpikani/Projects/biweekly/ois2-calendar-et (2).ics | /Users/dariusko/Desktop/OOP/ois2-calendar-et.ics
         try {
             sündmusedTunniplaanis.sorteeri();
         } catch (IOException e) {

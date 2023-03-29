@@ -1,13 +1,10 @@
 import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
-import biweekly.util.ICalDate;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class SündmusedTunniplaanis {
 
@@ -134,7 +131,6 @@ public class SündmusedTunniplaanis {
             boolean onTulemas;
             var praeguneKuupäev = new Date();
             VEvent event = kategList.get(i);
-            System.out.println(event);
 
             if (i != 0
                     && event.getSummary().getValue().equals(kategList.get(i - 1).getSummary().getValue())
@@ -147,11 +143,8 @@ public class SündmusedTunniplaanis {
             var kuupaev = event.getDateStart().getValue().toString().split(" ");
             var tööKuupäev = event.getDateStart().getValue();
 
-            if (praeguneKuupäev.compareTo(tööKuupäev) == -1) {
-                onTulemas = true;
-            } else {
-                onTulemas = false;
-            }
+            onTulemas = praeguneKuupäev.compareTo(tööKuupäev) == -1;
+
 
 
             String nadalapaev;
@@ -188,7 +181,6 @@ public class SündmusedTunniplaanis {
                     + kuu
                     + kuupaev[3];
             String koht;
-            System.out.println(aeg);
             try {
                 var osad = event.getLocation().getValue().split(" - ");
                 koht = osad[1];
@@ -240,16 +232,11 @@ public class SündmusedTunniplaanis {
             var nimi = event.getSummary().getValue();
             var kategooria = event.getCategories().get(0).getValues().toString();
             var kuupaev = event.getDateStart().getValue().toString().split(" ");
-            var lõppKuupäev = 0;
 
 
             var tööKuupäev = event.getDateStart().getValue();
 
-            if (praeguneKuupäev.compareTo(tööKuupäev) == -1) {
-                onTulemas = true;
-            } else {
-                onTulemas = false;
-            }
+            onTulemas = praeguneKuupäev.compareTo(tööKuupäev) == -1;
 
             String nadalapaev;
 
