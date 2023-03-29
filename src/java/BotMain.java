@@ -1,11 +1,8 @@
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class BotMain {
@@ -21,9 +18,9 @@ public class BotMain {
         }
         return null;
     }
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
-        final String TOKEN = loeTokenfailist("/Users/dariusko/Desktop/OOP/token.txt");
+        final String TOKEN = loeTokenfailist("/Users/dariusko/Desktop/OOP/token.txt"); // /Users/oliverpikani/Projects/token.txt
 
         JDABuilder botiEhitaja = JDABuilder.createDefault(TOKEN); // Loob boti isendi tokeni järgi.
         JDA bot = botiEhitaja
@@ -38,9 +35,6 @@ public class BotMain {
         bot.upsertCommand("proge2", "Programmeerimine 2 kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("andmebaasid", "Andmebaasid kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("diskmat", "Diskreetse matemaatika kontrolltööde ajad").setGuildOnly(true).queue();
-        bot.upsertCommand("tntms", "Tõenäosusteooria ja matemaatilise statistika kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("tnt", "Tõenäosusteooria ja matemaatilise statistika kontrolltööde ajad").setGuildOnly(true).queue();
-
-
     }
 }
