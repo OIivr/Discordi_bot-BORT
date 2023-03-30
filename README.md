@@ -2,9 +2,6 @@
 
 OOP rühmatöö 1
 
-Autorid: Oliver Pikani, Darius Kosk
+Autorid: Oliver Pikani ja Darius Kosk
 
-Eesmärk: Luua bot Discordi keskkonda, mis aitab üliõpilastel või muudel inimestel 
-olla kursis tulevaste tähtaegadega, näiteks kontrolltöödega.
-
-
+Eesmärk: Luua Bot suhtluskeskkonda Discord, mis aitaks tudengitel paremini oma aega planeerida ja tähtaegadest kinni pidada. Loodav rakendus kuvab infot saabuvate kontrolltööde kohta võttes aluseks ÕISis oleva tunniplaani.
