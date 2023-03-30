@@ -20,7 +20,7 @@ public class BotMain {
     }
     public static void main(String[] args){
 
-        final String TOKEN = loeTokenfailist("/Users/oliverpikani/Projects/token.txt"); // /Users/oliverpikani/Projects/token.txt  | /Users/dariusko/Desktop/OOP/token.txt
+        final String TOKEN = loeTokenfailist("/Users/dariusko/Desktop/OOP/token.txt"); // /Users/oliverpikani/Projects/token.txt  | /Users/dariusko/Desktop/OOP/token.txt
 
         JDABuilder botiEhitaja = JDABuilder.createDefault(TOKEN); // Loob boti isendi tokeni järgi.
         JDA bot = botiEhitaja
@@ -29,13 +29,18 @@ public class BotMain {
                 .build();
 
         // BOTI COMMANDIDE OSA
-
+        /**
+         * upsertCommandi esimene argument on Discordis otsitava käsklus nt "/tere" puhul rakendub esimene rida.
+         * teine argument on Discordis näidatav sõnum, enne käskluse rakendamist, mis kirjeldab, mida käsklus teeb.
+         */
         bot.upsertCommand("tere", "Tervitussõnum").setGuildOnly(true).queue();
         bot.upsertCommand("oop", "OOP-i kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("proge2", "Programmeerimine 2 kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("andmebaasid", "Andmebaasid kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("diskmat", "Diskreetse matemaatika kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("tnt", "Tõenäosusteooria ja matemaatilise statistika kontrolltööde ajad").setGuildOnly(true).queue();
-        bot.upsertCommand("jargmine", "Järgmise kontrolltöö aeg").setGuildOnly(true).queue();
+        bot.upsertCommand("kt", "Järgmise kontrolltöö aeg").setGuildOnly(true).queue();
+        bot.upsertCommand("next", "Järgmise kontrolltöö aeg").setGuildOnly(true).queue();
+        bot.upsertCommand("help", "Boti kasutamise abi, olemasolevad command'id").setGuildOnly(true).queue();
     }
 }

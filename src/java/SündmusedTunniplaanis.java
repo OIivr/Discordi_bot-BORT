@@ -28,6 +28,10 @@ public class SündmusedTunniplaanis {
         return link;
     }
 
+    /**
+     * Loetakse läbi eelnevalt antud asukohaga .ics fail, kust loetakse vastav info
+     * @throws IOException, errori puhul ei jookse kokku
+     */
     public void sorteeri() throws IOException {
         File file = new File(link);
         List<ICalendar> kalender = Biweekly.parse(file).all();
@@ -62,12 +66,15 @@ public class SündmusedTunniplaanis {
             case 4 -> kategList = tnt;
             case 5 -> kategList = disk;
             case 6 -> kategList = mmp;
-            case 7 -> kategList = kõik;
+            case 7 -> kategList = kõik; // juhul kui otsitakse järgmist tulevat kontrolltööd, peab vaatama kõiki aineid, mitte üht kindlat.
             default -> kategList = tundmatud;
         }
-        boolean onTulemas;
+        boolean onTulemas; //Näitab, kas kontrolltöö on veel tulemas, ehk kas selle toimumine on ajaliselt hiljem, kui käskluse kasutamise hetk.
         var praeguneKuupäev = new Date();
 
+        /**
+         * Sorteerib listis oleva info töö aja järgi.
+         */
         for (int i = 0; i < kategList.size(); i++) {
             for (int j = i; j < kategList.size(); j++) {
                 if (kategList.get(i).getDateStart().getValue().after(kategList.get(j).getDateStart().getValue())) {
@@ -135,6 +142,9 @@ public class SündmusedTunniplaanis {
             }
             var kirjeldus = event.getDescription().getValue().replaceAll("\\s", " ");
 
+            /**
+             * Koostab sõnumi, mida hiljem väljastatakse
+             */
             if (kategooria.equals("[" + kateg + "]")) {
                 if (!samaSyndmus && onTulemas) {
                     lause.append("\n\n").append("> ").append(nimi)
@@ -143,7 +153,8 @@ public class SündmusedTunniplaanis {
                             .append("\n> Aeg: ").append(aeg)
                             .append("\n> Ruumid: ").append(koht);
 
-                    if(kategList.equals(kõik)) return lause.toString();
+                    if(kategList.equals(kõik)) // Kui otsiti järgmist tulevat kontrolltööd, kasutati kõikide tööde listi, seega tuleb väljastada ainult esimene (kuna list on sorteeritud). Vastasel juhul väljastatakse kõigi tööde info kindlas aines.
+                        return lause.toString();
                 }
             }
         }
