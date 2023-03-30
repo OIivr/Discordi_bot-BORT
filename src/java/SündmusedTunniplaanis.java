@@ -6,8 +6,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Loeb ÕISi tunniplaani .ics failist ja tagastab selle eesti keeles ja loetaval kujul
+ */
 public class SündmusedTunniplaanis {
 
+    // kõikide ainete jaoks eraldi listid ja üks ühine list.
     private String link;
     private List<VEvent> oop = new ArrayList<>();
     private List<VEvent> ab = new ArrayList<>();
@@ -29,12 +33,12 @@ public class SündmusedTunniplaanis {
     }
 
     /**
-     * Loetakse läbi eelnevalt antud asukohaga .ics fail, kust loetakse vastav info
+     * Loeb .ics failist info ja sorteerib vastavalt ainele oma kategooriatesse.
      * @throws IOException, errori puhul ei jookse kokku
      */
     public void sorteeri() throws IOException {
         File file = new File(link);
-        List<ICalendar> kalender = Biweekly.parse(file).all();
+        List<ICalendar> kalender = Biweekly.parse(file).all(); // Biweekly klass, mille leidsin, oskab hästi .ics faile lugeda
         var events = kalender.get(0);
 
         for (int i = 0; true; i++) {
@@ -42,6 +46,7 @@ public class SündmusedTunniplaanis {
                 VEvent syndmus = events.getEvents().get(i);
                 String[] aine = syndmus.getSummary().getValue().toString().split(" - ");
                 switch (aine[0]) {
+                    // jagame aine järgi listidesse
                     case "Objektorienteeritud programmeerimine" -> oop.add(syndmus);
                     case "Andmebaasid" -> ab.add(syndmus);
                     case "Tõenäosusteooria ja matemaatiline statistika" -> tnt.add(syndmus);
@@ -56,6 +61,13 @@ public class SündmusedTunniplaanis {
             }
         }
     }
+
+    /**
+     * Väljastab sündmused vastavalt ainele ja kategooriale
+     * @param aine ette antud aine, mis kohta infot soovitakse
+     * @param kateg antud kategooria (meie puhul ainult kontrolltöö)
+     * @return String loetaval kujul, mida bot saab DIscordi serverisse väljastada
+     */
     public String väljastaSündmused(int aine, String kateg) {
         List<VEvent> kategList;
         StringBuilder lause = new StringBuilder();
@@ -66,14 +78,14 @@ public class SündmusedTunniplaanis {
             case 4 -> kategList = tnt;
             case 5 -> kategList = disk;
             case 6 -> kategList = mmp;
-            case 7 -> kategList = kõik; // juhul kui otsitakse järgmist tulevat kontrolltööd, peab vaatama kõiki aineid, mitte üht kindlat.
+            case 7 -> kategList = kõik; // juhul kui otsitakse järgmist tulevat kontrolltööd, peab vaatama kõiki aineid.
             default -> kategList = tundmatud;
         }
-        boolean onTulemas; //Näitab, kas kontrolltöö on veel tulemas, ehk kas selle toimumine on ajaliselt hiljem, kui käskluse kasutamise hetk.
+        boolean onTulemas; //Näitab, kas kontrolltöö on veel tulemas, ehk kas selle toimumine on ajaliselt hiljem, kui käskluse kasutamise hetkel.
         var praeguneKuupäev = new Date();
 
         /**
-         * Sorteerib listis oleva info töö aja järgi.
+         * Sorteerib tööd listis oleva kontrolltöö aja järgi.
          */
         for (int i = 0; i < kategList.size(); i++) {
             for (int j = i; j < kategList.size(); j++) {
@@ -85,14 +97,15 @@ public class SündmusedTunniplaanis {
             }
         }
         for (int i = 0; i < kategList.size(); i++) {
-            boolean samaSyndmus = false;
+            boolean samaSyndmus = false; // muutuja sama sündmuse jaoks (kui kontrolltöö mitmes erinevas ruumis)
 
             VEvent event = kategList.get(i);
+            // kui sündmus pole listis esimene, siis kontrollib kas eelnev ja hetkel käsitletav sündmus on samad
             if (i != 0
                     && event.getSummary().getValue().equals(kategList.get(i - 1).getSummary().getValue())
                     && event.getDateStart().getValue().equals(kategList.get(i - 1).getDateStart().getValue())
                     && event.getDescription().getValue().strip().equals(kategList.get(i - 1).getDescription().getValue().strip())) {
-                samaSyndmus = true;
+                samaSyndmus = true; // kui nimi ,kirjeldus ja aeg klapivad, siis järelikult sama sündmus
             }
             var nimi = event.getSummary().getValue();
             var kategooria = event.getCategories().get(0).getValues().toString();
@@ -103,6 +116,7 @@ public class SündmusedTunniplaanis {
 
             String nadalapaev;
 
+            // tõlgib eesti keelde ja meile sobivasse formaati
             switch (kuupaev[0]) {
                 case "Mon" -> nadalapaev = "E ";
                 case "Tue" -> nadalapaev = "T ";
@@ -135,12 +149,13 @@ public class SündmusedTunniplaanis {
                     + kuupaev[3];
             String koht;
             try {
+                // osadel sündmustel pole asukohta määratud, sellisel juhul lisame sellekohase teate
                 var osad = event.getLocation().getValue().split(" - ");
                 koht = osad[1];
             } catch (Exception e) {
                 koht = "Asukoht pole märgitud.";
             }
-            var kirjeldus = event.getDescription().getValue().replaceAll("\\s", " ");
+            var kirjeldus = event.getDescription().getValue().replaceAll("\\s", " "); // eemaldame üleliigsed tühikud ja reavahetused
 
             /**
              * Koostab sõnumi, mida hiljem väljastatakse
@@ -158,6 +173,7 @@ public class SündmusedTunniplaanis {
                 }
             }
         }
+        // kui tsükkli lõpus on väljastatav lause ikka tühi, siis pole selles aines infot KT kohta
         if (lause.toString().equals("")) return "\n> Hetkel puudub info tulevaste kontrolltööde kohta.";
         return lause.toString();
     }

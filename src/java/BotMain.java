@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class BotMain {
 
+    /**
+    * Loeb failist boti tokeni(projekti kaustast eraldi) ja tagastab selle
+    */
     public static String loeTokenfailist(String misfail) {
         try {
             File fail = new File(misfail);
@@ -20,12 +23,12 @@ public class BotMain {
     }
     public static void main(String[] args){
 
-        final String TOKEN = loeTokenfailist("/Users/dariusko/Desktop/OOP/token.txt"); // /Users/oliverpikani/Projects/token.txt  | /Users/dariusko/Desktop/OOP/token.txt
+        final String TOKEN = loeTokenfailist("/Users/oliverpikani/Projects/token.txt"); // tokeni fail
 
         JDABuilder botiEhitaja = JDABuilder.createDefault(TOKEN); // Loob boti isendi tokeni järgi.
         JDA bot = botiEhitaja
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES)
-                .addEventListeners(new kasBotOnline(), new Käsklused())
+                .addEventListeners(new kasBotOnline(), new Käsklused()) // lisame botile kaks EventListeneri käskluste ja oleku teate jaoks
                 .build();
 
         // BOTI COMMANDIDE OSA

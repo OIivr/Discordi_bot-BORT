@@ -7,13 +7,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Käsklused extends ListenerAdapter {
+    /**
+     * Käskluse korral väljastatakse vastav sõnum
+     * @param käsklus Discordis kasutatav command
+     */
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent käsklus) {
         super.onSlashCommandInteraction(käsklus);
 
         System.out.println("käsklust /" + käsklus.getName() + " kasutas: " + käsklus.getUser().getAsTag());  // Väljastab (Java keskkonnas) info, mis näitab, kes millist käsklust kasutas.
 
-        SündmusedTunniplaanis sündmusedTunniplaanis = new SündmusedTunniplaanis("/Users/dariusko/Desktop/OOP/ois2-calendar-et.ics"); // /Users/oliverpikani/Projects/biweekly/ois2-calendar-et (2).ics | /Users/dariusko/Desktop/OOP/ois2-calendar-et.ics
+        SündmusedTunniplaanis sündmusedTunniplaanis = new SündmusedTunniplaanis("/Users/oliverpikani/Projects/biweekly/ois2-calendar-et (2).ics");
         try {                                                                                                                             // Bot leiab sündmused kalendrifailist, mis peab olema boti asukohaga samas kaustas, seega peab boti tööle panija lisama oma lingi arguementi.
             sündmusedTunniplaanis.sorteeri();
         } catch (IOException e) {
@@ -66,14 +70,14 @@ public class Käsklused extends ListenerAdapter {
                     + "\nSiin on järgmine kalendris leitav kontrolltöö:"
                     + sündmusedTunniplaanis.väljastaSündmused(7, "kontrolltöö") + Motivatsioon.genereeri()).queue();
             case "help" -> käsklus.reply(Tervitused.genereeriTervituslause(tervituslaused) + " Selleks, et mind kasutada, on olemas erinevad käsud: " +
-                    "\n> /help -> Praegu kasutatud käsk" +
-                    "\n> /tere -> Tervitab käsu kasutajat :)" +
-                    "\n> /oop -> Väljastab aines 'Objektorienteeritud Programmeerimine' tulevate kontrolltööde info" +
-                    "\n> /proge2 -> Väljastab aines 'Programmeerimine II' tulevate kontrolltööde info"+
-                    "\n> /andmebaasid -> Väljastab aines 'Andmebaasid' tulevate kontrolltööde info " +
-                    "\n> /tnt -> Väljastab aines 'Tõenäosusteeoria ja matemaatiline statistika' tulevate kontrolltööde info " +
-                    "\n> /diskmat -> Väljastab aines 'Diskreetne matemaatika I' tulevate kontrolltööde info " +
-                    "\n> /kt või /next -> Väljastab järgmise tunniplaanis leitava kontrolltöö info").queue();
+                    "\n> `/help` -> Praegu kasutatud käsk" +
+                    "\n> `/tere` -> Tervitab käsu kasutajat :)" +
+                    "\n> `/oop` -> Väljastab aines 'Objektorienteeritud Programmeerimine' tulevate kontrolltööde info" +
+                    "\n> `/proge2` -> Väljastab aines 'Programmeerimine II' tulevate kontrolltööde info"+
+                    "\n> `/andmebaasid` -> Väljastab aines 'Andmebaasid' tulevate kontrolltööde info " +
+                    "\n> `/tnt` -> Väljastab aines 'Tõenäosusteeoria ja matemaatiline statistika' tulevate kontrolltööde info " +
+                    "\n> `/diskmat` -> Väljastab aines 'Diskreetne matemaatika I' tulevate kontrolltööde info " +
+                    "\n> `/kt` või `/next` -> Väljastab järgmise tunniplaanis leitava kontrolltöö info").queue();
         }
     }
 }
