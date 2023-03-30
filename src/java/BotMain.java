@@ -20,7 +20,7 @@ public class BotMain {
     }
     public static void main(String[] args){
 
-        final String TOKEN = loeTokenfailist("/Users/dariusko/Desktop/OOP/token.txt"); // /Users/oliverpikani/Projects/token.txt  | /Users/dariusko/Desktop/OOP/token.txt
+        final String TOKEN = loeTokenfailist("/Users/oliverpikani/Projects/token.txt"); // /Users/oliverpikani/Projects/token.txt  | /Users/dariusko/Desktop/OOP/token.txt
 
         JDABuilder botiEhitaja = JDABuilder.createDefault(TOKEN); // Loob boti isendi tokeni järgi.
         JDA bot = botiEhitaja

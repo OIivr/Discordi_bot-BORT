@@ -12,7 +12,7 @@ public class Käsklused extends ListenerAdapter {
 
         System.out.println("käsklust /" + käsklus.getName() + " kasutas: " + käsklus.getUser().getAsTag());
 
-        SündmusedTunniplaanis sündmusedTunniplaanis = new SündmusedTunniplaanis("/Users/dariusko/Desktop/OOP/ois2-calendar-et.ics"); // /Users/oliverpikani/Projects/biweekly/ois2-calendar-et (2).ics | /Users/dariusko/Desktop/OOP/ois2-calendar-et.ics
+        SündmusedTunniplaanis sündmusedTunniplaanis = new SündmusedTunniplaanis("/Users/oliverpikani/Projects/biweekly/ois2-calendar-et (2).ics"); // /Users/oliverpikani/Projects/biweekly/ois2-calendar-et (2).ics | /Users/dariusko/Desktop/OOP/ois2-calendar-et.ics
         try {
             sündmusedTunniplaanis.sorteeri();
         } catch (IOException e) {
@@ -48,28 +48,22 @@ public class Käsklused extends ListenerAdapter {
             case "tere" -> käsklus.reply("> " + Tervitused.genereeriTervituslause(tervituslaused)).queue();
             case "oop" -> käsklus.reply(Tervitused.genereeriTervitussõna(tervitussõnad)
                             + "\nSiin on OOP-i kontrolltööde ajad:"
-                            + sündmusedTunniplaanis.väljastaSündmused(1, "kontrolltöö"))
-                    .queue();
+                            + sündmusedTunniplaanis.väljastaSündmused(1, "kontrolltöö")).queue();
             case "proge2" -> käsklus.reply(Tervitused.genereeriTervitussõna(tervitussõnad)
                             + "\nSiin on Proge 2 kontrolltööde ajad:"
-                            + sündmusedTunniplaanis.väljastaSündmused(2, "kontrolltöö"))
-                    .queue();
+                            + sündmusedTunniplaanis.väljastaSündmused(2, "kontrolltöö")).queue();
             case "andmebaasid" -> käsklus.reply(Tervitused.genereeriTervitussõna(tervitussõnad)
                             + "\nSiin on Andmebaaside kontrolltööde ajad:"
-                            + sündmusedTunniplaanis.väljastaSündmused(3, "kontrolltöö"))
-                    .queue();
+                            + sündmusedTunniplaanis.väljastaSündmused(3, "kontrolltöö")).queue();
             case "tnt" -> käsklus.reply(Tervitused.genereeriTervitussõna(tervitussõnad)
                             + "\nSiin on Tõenäosusteooria ja matemaatilise statistika kontrolltööde ajad:"
-                            + sündmusedTunniplaanis.väljastaSündmused(4, "kontrolltöö"))
-                    .queue();
+                            + sündmusedTunniplaanis.väljastaSündmused(4, "kontrolltöö")).queue();
             case "diskmat" -> käsklus.reply(Tervitused.genereeriTervitussõna(tervitussõnad)
                             + "\nSiin on Diskreetse matemaatika kontrolltööde ajad:"
-                            + sündmusedTunniplaanis.väljastaSündmused(5, "kontrolltöö"))
-                    .queue();
+                            + sündmusedTunniplaanis.väljastaSündmused(5, "kontrolltöö")).queue();
             case "jargmine" -> käsklus.reply(Tervitused.genereeriTervitussõna(tervitussõnad)
                             + "\nSiin on järgmine kalendris leitav kontrolltöö:"
-                            + sündmusedTunniplaanis.väljastaSündmused("kontrolltöö"))
-                    .queue();
+                            + sündmusedTunniplaanis.väljastaSündmused(7, "kontrolltöö")).queue();
         }
     }
 }
