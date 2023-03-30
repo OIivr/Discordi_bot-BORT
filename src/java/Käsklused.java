@@ -1,8 +1,8 @@
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Käsklused extends ListenerAdapter {
@@ -24,25 +24,15 @@ public class Käsklused extends ListenerAdapter {
         List<String> tervitussõnad = new ArrayList<>();
         List<String> tervituslaused = new ArrayList<>();
 
-        tervitussõnad.add("Tere! ");
-        tervitussõnad.add("Hei! ");
-        tervitussõnad.add("Hei-hei! ");
-        tervitussõnad.add("👋 Hei-hei! ");
-        tervitussõnad.add("👋 Hei! ");
-        tervitussõnad.add("👋 Tere!");
-        tervitussõnad.add("Ahoi!");
-        tervitussõnad.add("Tsau! ");
-        tervitussõnad.add("Tervist! ");
-        tervitussõnad.add("Tere tere! ");
-        tervitussõnad.add("Tsauki! ");
-        tervitussõnad.add("👋 Tervitus! ");
-        tervitussõnad.add("Tervitus! ");
-        tervitussõnad.add("👋 Tsau! ");
+        Collections.addAll(tervitussõnad,"Tere! ","Hei! "
+                ,"Hei-hei! ","👋 Hei-hei! ","👋 Hei! ","👋 Tere!"
+                ,"Ahoi!","Tsau! ","Tervist! ","Tere tere! ","Tsauki! "
+                ,"👋 Tervitus! ","Tervitus! ","👋 Tsau! ");
 
-
-        tervituslaused.add(Tervitused.genereeriTervitussõna(tervitussõnad) + käsklus.getUser().getAsMention() + "\n> Mina olen Bort ja aitan sind sinu ajaplaneerimisega 😇");
-        tervituslaused.add(Tervitused.genereeriTervitussõna(tervitussõnad) + käsklus.getUser().getAsMention() + "\n> Mina olen Bort ja ma olen sinu abimees planerimiseks Discordis!");
-        tervituslaused.add(Tervitused.genereeriTervitussõna(tervitussõnad) + käsklus.getUser().getAsMention() + "\n> Mina olen Bort ja ma oskan sind aidata!");
+        Collections.addAll(tervituslaused,
+                Tervitused.genereeriTervitussõna(tervitussõnad) + käsklus.getUser().getAsMention() + "\n> Mina olen Bort ja aitan sind sinu ajaplaneerimisega 😇",
+                            Tervitused.genereeriTervitussõna(tervitussõnad) + käsklus.getUser().getAsMention() + "\n> Mina olen Bort ja ma olen sinu abimees planerimiseks Discordis!",
+                            Tervitused.genereeriTervitussõna(tervitussõnad) + käsklus.getUser().getAsMention() + "\n> Mina olen Bort ja ma oskan sind aidata!");
 
         switch (käsklus.getName()) {
             case "tere" -> käsklus.reply("> " + Tervitused.genereeriTervituslause(tervituslaused)).queue();

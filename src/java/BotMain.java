@@ -36,6 +36,6 @@ public class BotMain {
         bot.upsertCommand("andmebaasid", "Andmebaasid kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("diskmat", "Diskreetse matemaatika kontrolltööde ajad").setGuildOnly(true).queue();
         bot.upsertCommand("tnt", "Tõenäosusteooria ja matemaatilise statistika kontrolltööde ajad").setGuildOnly(true).queue();
-        bot.upsertCommand("jargmine", "Järgmise leitava kontrolltöö aeg").setGuildOnly(true).queue();
+        bot.upsertCommand("jargmine", "Järgmise kontrolltöö aeg").setGuildOnly(true).queue();
     }
 }
