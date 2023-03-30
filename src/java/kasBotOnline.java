@@ -6,7 +6,7 @@ public class kasBotOnline implements EventListener {
 
     @Override
     public void onEvent(GenericEvent syndmus) {
-        if (syndmus instanceof ReadyEvent){
+        if (syndmus instanceof ReadyEvent){ //Kontrollib, kas bot on online.
             System.out.println("Bot on valmis ja online");
         }
     }
